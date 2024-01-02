@@ -1,20 +1,9 @@
-import React from "react";
-import Nav from "../components/nav";
-import Hero from "../components/hero";
-import Features from "../components/features";
-import QualityInfo from "../components/qualityInfo";
-import Section3 from "../components/section3";
+import React from 'react'
 
-const homePage = () => {
+const home = () => {
   return (
-    <>
-      <Nav />
-      <Hero />
-      <Features />
-      <QualityInfo />
-      <Section3 />
-    </>
-  );
-};
+    <div>home</div>
+  )
+}
 
-export default homePage;
+export default home
