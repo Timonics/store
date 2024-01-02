@@ -19,9 +19,9 @@ app.use(bodyParser.json());
 app.use(morgan("tiny"));
 
 //cors config
-//app.use(cors(corsOptions))
+app.use(cors(corsOptions))
 
-
+//Middleware for token verification
 app.use(authJwt());
 
 //error handling middleware
