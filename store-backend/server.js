@@ -19,9 +19,10 @@ app.use(bodyParser.json());
 app.use(morgan("tiny"));
 
 //cors config
-app.use(cors(corsOptions))
+//app.use(cors(corsOptions))
 
-//app.use(authJwt());
+
+app.use(authJwt());
 
 //error handling middleware
 app.use(errorHandler);
