@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const cors = require("cors");
+const corsOptions = require('./config/corsOptions');
 const authJwt = require("./helpers/jwt");
 const errorHandler = require("./helpers/errorHandler");
 
@@ -18,15 +19,7 @@ app.use(bodyParser.json());
 app.use(morgan("tiny"));
 
 //cors config
-const whitelist = ["https://www.mysite.com", "http://localhost:5173"];
-const corsOptions = (origin, callback) => {
-  if (whitelist.indexOf(origin) != -1) {
-    callback(null, true);
-  }else {
-    callback(new Error('Not allowed by CORS'))
-  }
-}
-app.use(cors(corsOptions));
+app.use(cors(corsOptions))
 
 //app.use(authJwt());
 

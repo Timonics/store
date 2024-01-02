@@ -4,7 +4,7 @@ function errorHandler(err, req, res, next) {
   }
 
   if (err.name == "validationError") {
-    res.status(401).json({ success: false, message: "The user is not autorized" });
+    res.status(401).json({ success: false, message: "The name is not valid" });
   }
 
   return res.status(500).json(err)
