@@ -4,9 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        "mypink": "#fbcfe8",
-        "mypurple": "#e9d5ff",
-        "myindigo": "#c7d2fe"
+        "mywhite": "#8787a31b"
       }
     },
   },
