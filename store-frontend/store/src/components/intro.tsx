@@ -5,6 +5,8 @@ import { GoArrowRight } from "react-icons/go"
 import { IoCartOutline } from "react-icons/io5";
 import { FaFacebook, FaFacebookMessenger, FaInstagram } from "react-icons/fa"
 import { FaTwitter } from "react-icons/fa6";
+import { MdOutlineAccountCircle } from "react-icons/md";
+
 
 
 
@@ -14,10 +16,10 @@ const intro = () => {
     <div className="h-screen flex flex-col">
       <div className='h-1/6 flex justify-between m-4 items-center text-gray-900 text-center'>
         <h1 className='ml-6 p-4 rounded-lg shadow-lg'>logo</h1>
-        <div className='flex gap-14 mr-14 items-center'>
-
+        <div className='flex gap-10 items-center text-xl'> 
+          <Link to="register" className='flex flex-col items-center'><MdOutlineAccountCircle color='#9333ea' /> <p className='text-xs text-purple-700 font-bold'>Register</p></Link>
+          <Link to="cart" className='mr-6 flex flex-col items-center'><IoCartOutline color='#111827 '/> <p className='text-xs text-gray-900 font-bold'>Cart</p></Link>
         </div>
-        <Link to="cart" className='mr-6'><IoCartOutline size="" /></Link>
       </div>
       <div className='h-4/6 flex flex-col gap-10 justify-center items-center'>
         <div className='flex flex-col items-center gap-2'>
