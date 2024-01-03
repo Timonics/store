@@ -2,12 +2,22 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import { GoArrowRight } from "react-icons/go"
+import { IoCartOutline } from "react-icons/io5";
+import { FaFacebook, FaFacebookMessenger, FaInstagram } from "react-icons/fa"
+import { FaTwitter } from "react-icons/fa6";
+
+
+
 
 const intro = () => {
   return (
     <div className="h-screen flex flex-col">
-      <div className='h-1/6 flex justify-center items-center italic text-gray-500'>
-        <h1 className='p-4 rounded-lg shadow-lg'>logo</h1>
+      <div className='h-1/6 flex justify-between m-4 items-center text-gray-900 text-center'>
+        <h1 className='ml-6 p-4 rounded-lg shadow-lg'>logo</h1>
+        <div className='flex gap-14 mr-14 items-center'>
+
+        </div>
+        <Link to="cart" className='mr-6'><IoCartOutline size="" /></Link>
       </div>
       <div className='h-4/6 flex flex-col gap-10 justify-center items-center'>
         <div className='flex flex-col items-center gap-2'>
@@ -24,7 +34,19 @@ const intro = () => {
           '>Sign Up <GoArrowRight color='#9333ea' /></Link>
         </div>
       </div>
-      <div className='h-1/6  border-2 border-red-400'></div>
+      <div className='h-1/6  flex flex-col items-center justify-center '>
+        <p className='text-xs'>© 2024 Mickey'z Hub Inc. All rights reserved.</p>
+        <div className='flex gap-5 m-2'>
+          <Link to="
+          "><FaInstagram /></Link>
+          <Link to="
+          "><FaFacebook /></Link>
+          <Link to="
+          "><FaTwitter /></Link>
+          <Link to="
+          "><FaFacebookMessenger /></Link>
+        </div>
+      </div>
     </div>
   )
 }

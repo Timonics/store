@@ -5,6 +5,9 @@ export default {
     extend: {
       colors: {
         "mywhite": "#8787a31b"
+      },
+      borderWidth: {
+        "mywidth": "5px"
       }
     },
   },
