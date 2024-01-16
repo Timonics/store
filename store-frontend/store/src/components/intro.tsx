@@ -7,48 +7,40 @@ import { FaFacebook, FaFacebookMessenger, FaInstagram } from "react-icons/fa"
 import { FaTwitter } from "react-icons/fa6";
 import { MdOutlineAccountCircle } from "react-icons/md";
 
-
-
-
-
 const intro = () => {
   return (
     <div className="h-screen flex flex-col">
       <div className='h-1/6 flex justify-between m-4 items-center text-gray-900 text-center'>
         <h1 className='ml-6 p-4 rounded-lg shadow-lg'>logo</h1>
-        <div className='flex gap-10 items-center text-xl'> 
-          <Link to="register" className='flex flex-col items-center'><MdOutlineAccountCircle color='#9333ea' /> <p className='text-xs text-purple-700 font-bold'>Register</p></Link>
-          <Link to="cart" className='mr-6 flex flex-col items-center'><IoCartOutline color='#111827 '/> <p className='text-xs text-gray-900 font-bold'>Cart</p></Link>
+        <div className='flex gap-10 items-center text-xl'>
+          <Link to="login" className='flex flex-col items-center'><MdOutlineAccountCircle color='rgb(79 70 229)' /> <p className='text-xs text-indigo-600 font-semibold'>Login</p></Link>
+          <Link to="cart" className='mr-6 flex flex-col items-center'><IoCartOutline color='#111827 ' /> <p className='text-xs text-gray-900 font-bold'>Cart</p></Link>
         </div>
       </div>
       <div className='h-4/6 flex flex-col gap-10 justify-center items-center'>
         <div className='flex flex-col items-center gap-2'>
-          <h1 className='text-gray-900 font-bold text-6xl text-center'> Welcome to <span className='text-purple-700'>Mickey'z store</span> <br />Where Style Meets Innovation!  </h1>
+          <h1 className='text-gray-900 font-bold text-6xl text-center'> Welcome to <span className=' text-indigo-600'>Mickey'z store</span> <br />Where Style Meets Innovation!  </h1>
           <p className='text-center w-3/5  text-sm '>Redefine your style with our  curated collection of trendsetting apparel and accessories. We're not just a fashion store; we're your go-to destination for the latest trends delivered with a touch of digital elegance.</p>
         </div>
         <div className='w-full  flex justify-center gap-20 mr-14'>
           <Link to="home" className=' rounded-full p-3 px-10 bg-gray-900
-          text-gray-100 font-semibold shadow-md transition hover:-translate-y-2 hover:scale-110 
-          duration-300 hover:bg-purple-600
-          hover:text-slate-100'>Start Shopping!!!</Link>
-          <Link to="register" className='flex gap-2 items-center rounded-full shadow-lg p-3 px-10 font-bold text-purple-700 transition hover:-translate-y-2 hover:scale-110 
-          duration-300
-          '>Sign Up <GoArrowRight color='#9333ea' /></Link>
+          text-gray-300 font-semibold shadow-md transition hover:-translate-y-2 hover:scale-110 
+          duration-300 hover:bg-indigo-600
+          hover:text-gray-950'>Start Shopping!!!</Link>
+          <Link to="register" className='flex gap-2 items-center rounded-full shadow-xl p-3 px-10 font-bold text-gray-900 transition hover:-translate-y-2 hover:scale-110 
+          duration-300 hover:bg-indigo-600 hover:text-gray-950
+          '>Sign Up <GoArrowRight color='#111827' /></Link>
         </div>
       </div>
       <div className='h-1/6  flex flex-col items-center justify-center '>
         <p className='text-xs'>© 2024 Mickey'z Hub Inc. All rights reserved.</p>
         <div className='flex gap-5 m-2'>
-          <Link to="
-          "><FaInstagram /></Link>
-          <Link to="
-          "><FaFacebook /></Link>
-          <Link to="
-          "><FaTwitter /></Link>
-          <Link to="
-          "><FaFacebookMessenger /></Link>
+          <Link to="https://www.instagram.com"><FaInstagram /></Link>
+          <Link to="https://www.facebook.com"><FaFacebook /></Link>
+          <Link to="https://www.x.com"><FaTwitter /></Link>
+          <Link to="https://www.messenger.com"><FaFacebookMessenger /></Link>
         </div>
-      </div>
+      </div>  
     </div>
   )
 }
