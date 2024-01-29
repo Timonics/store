@@ -5,13 +5,8 @@ import { IoHomeOutline } from 'react-icons/io5'
 import { FaSearch } from 'react-icons/fa'
 
 const nav = () => {
-  const activeStyle:React.CSSProperties = {
-    color: 'rgb(248 250 252)'
-  } 
-  const  no : string =  ""
-
   return (
-    <div className='flex flex-col gap-2 p-4 rounded-lg bg-gray-900 text-slate-300 font-bold text-base'>
+    <div className='flex flex-col gap-3 p-4 rounded-lg bg-gray-900 text-slate-300 font-bold text-xs'>
       <NavLink to="." className='flex gap-2 items-center hover:text-slate-50'><IoHomeOutline />Home</NavLink>
       <NavLink to="" className='flex gap-2 items-center  hover:text-slate-50'><FaSearch />Search</NavLink>
     </div>
