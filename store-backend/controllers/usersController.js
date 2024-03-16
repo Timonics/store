@@ -125,7 +125,7 @@ const userLogin = async (req, res) => {
 
     //comparing password and the hash
     if (user && bcrypt.compareSync(password, user.passwordHash)) {
-      //if the user is present and password matches the hash
+      //if the user is true and password matches the hash
       //create a token for authentication and give it an expiry time
       const token = jwt.sign(
         {

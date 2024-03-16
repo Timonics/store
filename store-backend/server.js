@@ -25,7 +25,7 @@ app.use(cors(corsOptions))
 app.use(authJwt());
 
 //error handling middleware
-app.use(errorHandler);
+app.use(errorHandler); 
 
 const categoryRouter = require("./routes/category");
 const productsRouter = require("./routes/products");
