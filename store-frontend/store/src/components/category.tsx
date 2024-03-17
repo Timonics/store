@@ -7,7 +7,7 @@ import { BiSolidCategory } from 'react-icons/bi';
 
 const category = () => {
   const categoryElements = data.map(item => (
-    <Link to={`../category/${item.name.toLowerCase()}`} className='border '>{item.name}</Link>
+    <Link to={`../category/${item.name.toLowerCase()}`} className='border'>{item.name}</Link>
   ))
 
   return (
@@ -17,7 +17,7 @@ const category = () => {
         <BiSolidCategory className='text-6xl'/>
         <h1 className='text-6xl'>Categories</h1>
         </div>
-        <div className=' h-full rounded-b-lg overflow-y-auto p-4'>
+        <div className='h-full rounded-b-lg overflow-y-auto p-4'>
           {categoryElements}
         </div>
       </div>
