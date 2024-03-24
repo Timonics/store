@@ -30,11 +30,13 @@ app.use(errorHandler);
 const categoryRouter = require("./routes/category");
 const productsRouter = require("./routes/products");
 const usersRouter = require("./routes/users");
+const ordersRouter = require("./routes/orders");
 
 //routes
 app.use(`${api}category`, categoryRouter);
 app.use(`${api}products`, productsRouter);
 app.use(`${api}users`, usersRouter);
+app.use(`${api}orders`, ordersRouter);
 
 //db connection
 mongoose

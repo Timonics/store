@@ -3,7 +3,10 @@ const { OrderItem } = require("../models/order-item");
 
 const getAllOrders = async (res, req) => {
   try {
-    const orderList = await Orders.find();
+    //populate the user's name in the orders list
+    const orderList = await Orders.find()
+      .populate("user", "name")
+      .sort({ dateCreated: -1 });
     if (!orderList) return res.status(400).send("No orders found");
 
     res.status(200).send(orderList);
@@ -16,18 +19,26 @@ const createNewOrder = async (req, res) => {
   try {
     //map through array of order items and get id of each item
     //resolving all array of promises into one promise
-    const orderItemsIds = Promise.all(orderItems.map(async orderItem => {
-      let newOrderItem = new OrderItem({
-        quantity: orderItem.quantity,
-        product: orderItem.product
+    const orderItemsIds = Promise.all(
+      orderItems.map(async (orderItem) => {
+        let newOrderItem = new OrderItem({
+          quantity: orderItem.quantity,
+          product: orderItem.product,
+        });
+
+        newOrderItem = await newOrderItem.save();
+
+        return newOrderItem._id;
       })
+    );
 
-      newOrderItem = await newOrderItem.save()
+    const orderItemsIdsResolved = await orderItemsIds;
 
-      return newOrderItem._id
+    const totalResolvedPrice = Promise.all(orderItemsIdsResolved.map(async orderItemsId => {
+      const orderItem = await OrderItem.findByID(orderItemsId).populate('product', 'price')
+      const totalprice = orderItem.product.price * orderItem.quantity
+      return totalprice
     }))
-
-    const orderItemsIdsResolved = await orderItemsIds
 
     const {
       orderItems,
@@ -52,7 +63,7 @@ const createNewOrder = async (req, res) => {
       country,
       phone,
       status,
-      totalPrice,
+      totalResolvedPrice,
       user,
       dateCreated,
     });
@@ -65,7 +76,67 @@ const createNewOrder = async (req, res) => {
   }
 };
 
+const getOrder = async (req, res) => {
+  try {
+    const { orderID } = req.params;
+    const singleOrder = Orders.findByID(orderID)
+      .populate("user")
+      .populate({
+        path: "orderItems",
+        populate: {
+          path: "product",
+          populate: "catgory",
+        },
+      });
+    if (!singleOrder)
+      return res.status(400).send("The specified order does not exist");
+
+    res.status(200).send(singleOrder);
+  } catch (err) {
+    res.status(500).json({ success: false, error: err });
+  }
+};
+
+const updateOrder = async (req, res) => {
+  try {
+    const { orderID } = req.params;
+    const { status } = req.body;
+
+    const updatedOrder = await Orders.findByIdAndUpdate(
+      orderID,
+      {
+        status,
+      },
+      { new: true }
+    );
+    if (!updatedOrder) return res.status(400).send("Error....");
+
+    res.status(200).send(updatedOrder);
+  } catch (err) {
+    res.status(500).json({ success: false, error: err });
+  }
+};
+
+const deleteOrder = async (req, res) => {
+  try {
+    const { orderID } = req.params;
+    Orders.findByIdAndDelete(orderID).then(async (order) => {
+      if (order) {
+        await order.OrderItem.map(async (orderItem) => {
+          await OrderItem.findByIdAndDelete(orderItem);
+        });
+        res.status(200).send("The order-item has been deleted");
+      } else return res.status(400).send("The specified order-item does not exist");
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err });
+  }
+};
+
 module.exports = {
   getAllOrders,
-  createNewOrder
+  createNewOrder,
+  getOrder,
+  updateOrder,
+  deleteOrder,
 };
