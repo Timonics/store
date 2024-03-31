@@ -34,11 +34,20 @@ const createNewOrder = async (req, res) => {
 
     const orderItemsIdsResolved = await orderItemsIds;
 
-    const totalResolvedPrice = Promise.all(orderItemsIdsResolved.map(async orderItemsId => {
-      const orderItem = await OrderItem.findByID(orderItemsId).populate('product', 'price')
-      const totalprice = orderItem.product.price * orderItem.quantity
-      return totalprice
-    }))
+    const totalResolvedPrice = Promise.all(
+      orderItemsIdsResolved.map(async (orderItemsId) => {
+        const orderItem = await OrderItem.findByID(orderItemsId).populate(
+          "product",
+          "price"
+        );
+        const totalprice = orderItem.product.price * orderItem.quantity;
+        return totalprice;
+      })
+    );
+
+    const totalPrices = await totalResolvedPrice;
+
+    const totalPrice = totalPrices.reduce((a, b) => a + b);
 
     const {
       orderItems,
@@ -49,7 +58,6 @@ const createNewOrder = async (req, res) => {
       country,
       phone,
       status,
-      totalPrice,
       user,
       dateCreated,
     } = req.body;
@@ -63,7 +71,7 @@ const createNewOrder = async (req, res) => {
       country,
       phone,
       status,
-      totalResolvedPrice,
+      totalPrice,
       user,
       dateCreated,
     });
@@ -126,8 +134,52 @@ const deleteOrder = async (req, res) => {
           await OrderItem.findByIdAndDelete(orderItem);
         });
         res.status(200).send("The order-item has been deleted");
-      } else return res.status(400).send("The specified order-item does not exist");
+      } else
+        return res.status(400).send("The specified order-item does not exist");
     });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err });
+  }
+};
+
+const getTotalSales = async (req, res) => {
+  try {
+    const totalSales = await Orders.aggregate([
+      { $group: { _id: null, totalsales: "$totalPrice" } },
+    ]);
+
+    if (!totalSales)
+      return res.status(400).send("The order sales cannot be generated");
+
+    res.status(200).send({ totalsales: totalSales.pop().totalsales });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err });
+  }
+};
+
+const getTotalOrderCount = async (req, res) => {
+  const orderCount = await Orders.countDocuments((count) => count);
+  if (!orderCount) res.status(500).json({ success: false });
+
+  res.status(200).json({ orderCount });
+};
+
+const getUserOrders = async (req, res) => {
+  try {
+    const { userID } = req.params;
+    const userOrders = Orders.find({ userID })
+      .populate("user")
+      .populate({
+        path: "orderItems",
+        populate: {
+          path: "product",
+          populate: "catgory",
+        },
+      });
+    if (!userOrders)
+      return res.status(400).send("The specified order does not exist");
+
+    res.status(200).send(userOrders);
   } catch (err) {
     res.status(500).json({ success: false, error: err });
   }
@@ -139,4 +191,7 @@ module.exports = {
   getOrder,
   updateOrder,
   deleteOrder,
+  getTotalSales,
+  getTotalOrderCount,
+  getUserOrders,
 };

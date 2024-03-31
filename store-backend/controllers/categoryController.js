@@ -3,7 +3,7 @@ const { Category } = require("../models/category");
 const getAllCategory = async (req, res) => {
   try {
     const categoryList = await Category.find();
-    if (!categoryList) return res.status(400).send("No categories found");
+    if (categoryList.length == 0) return res.status(400).send("No categories found");
 
     res.status(200).send(categoryList);
   } catch (err) {

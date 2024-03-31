@@ -5,7 +5,10 @@ const {
   createNewOrder,
   getOrder,
   updateOrder,
-  deleteOrder
+  deleteOrder,
+  getTotalSales,
+  getTotalOrderCount,
+  getUserOrders
 } = require("../controllers/ordersController");
 
 router
@@ -18,5 +21,11 @@ router
   .get(getOrder)
   .put(updateOrder)
   .delete(deleteOrder)
+
+router.get("/get/totalsales", getTotalSales)
+
+router.get("/get/totalorders", getTotalOrderCount)
+
+router.get("get/userOrders/:userID", getUserOrders)
 
 module.exports = router;
