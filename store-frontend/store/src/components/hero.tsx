@@ -47,7 +47,13 @@ const hero = () => {
   }, [])
 
   const productsElements = productsData.map(item => (
-    <Link to={`/${item.category.name.toLowerCase()}/${item.name.toLowerCase().replace(/\s/g, "-")}`} key={item._id}>{item.name}</Link>
+    <Link 
+      to={`/${item.category.name.toLowerCase()}/${item.name.toLowerCase().replace(/\s/g, "-")}`} 
+      key={item._id}>
+        <img src={item.image} alt='product image' />
+        <h1>{item.name}</h1>
+        <p>{item.price}</p>        
+    </Link>
   ))
 
   return (
