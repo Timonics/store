@@ -3,7 +3,6 @@ import React from "react";
 import Nav from "../components/nav";
 import SideBar from "../components/sideBar";
 import Hero from "../components/hero";
-import Footer from "../components/footer";
 
 const home = () => {
   return (

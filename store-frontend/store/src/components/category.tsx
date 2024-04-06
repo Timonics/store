@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
-import data from '../data/categories'
-
 import { BiSolidCategory } from 'react-icons/bi';
 import axios from 'axios';
+import { Spin } from 'antd';
 
 const category = () => {
   interface Category {
@@ -15,13 +14,16 @@ const category = () => {
     image: string
   }
 
-  const [dbData, setDbData] = useState<Category[]>([])
+  const [categoryData, setCatgoryData] = useState<Category[]>([])
+
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
   const fetchCategoryApi = async () => {
     try {
       const response = await axios.get("http://localhost:3500/api/v1/category")
       const categoryItems = await response.data
-      setDbData(categoryItems)
+      setCatgoryData(categoryItems)
+      setIsLoading(false)
     } catch (err) {
       console.log(err);
     }
@@ -31,8 +33,9 @@ const category = () => {
     fetchCategoryApi()
   }, [])
 
-  const categoryElements = dbData.map((item) => (
-    <Link to={`../category/${item.name.toLowerCase()}`} key={item._id} className='border'>{item.name}</Link>
+  const categoryElements = categoryData.map((data) => (
+    <Link to={`../category/${data.name.toLowerCase()}`} key={data._id} className='rounded-lg w-full h-10 flex place-content-center items-start bg-slate-700 shadow-2xl transition hover:translate-y-0.5 hover:scale-110 
+    duration-300'>{data.name}</Link>
   ))
 
   return (
@@ -42,8 +45,8 @@ const category = () => {
           <BiSolidCategory className='text-6xl' />
           <h1 className='text-6xl'>Categories</h1>
         </div>
-        <div className='h-full rounded-b-lg overflow-y-auto p-4'>
-          {categoryElements}
+        <div className='h-full rounded-b-lg overflow-y-auto p-4 flex flex-col gap-4'>
+          {!isLoading ? categoryElements : <Spin size='large' className='flex place-content-center items-center h-full'/>}
         </div>
       </div>
     </div>

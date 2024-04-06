@@ -4,8 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "Poppins", sans-serif;
   background: linear-gradient(to bottom, #BDC3C7, #38424c);
   height: 100vh
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
