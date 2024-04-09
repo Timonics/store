@@ -1,0 +1,10 @@
+import React from 'react'
+import { Outlet } from 'react-router-dom'
+
+const categoryLayout: React.FC = () => {
+  return (
+    <Outlet />
+  )
+}
+
+export default categoryLayout

@@ -1,8 +1,8 @@
 import React from "react";
 
-import Nav from "../components/nav";
-import SideBar from "../components/sideBar";
-import Hero from "../components/hero";
+import Nav from "../components/nav/nav";
+import SideBar from "../components/nav/sideBar";
+import Hero from "../components/hero/hero";
 
 const home = () => {
   return (

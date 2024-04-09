@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 
-import { IoCartOutline } from 'react-icons/io5';
+import emptyCartIcon from "../../assets/images/emptyCart.png"
+
+import { IoHomeSharp } from "react-icons/io5";
 import { Link } from 'react-router-dom';
 
 const cart = () => {
@@ -10,9 +12,13 @@ const cart = () => {
     <div>
       <div className='h-screen px-16 py-7 text-slate-300'>
         <div className='h-full bg-gray-900 rounded-lg p-4 flex flex-col items-center'>
+          <Link to="/home" className='p-1 rounded-full bg-indigo-600 ml-auto'>
+            <IoHomeSharp color='rgb(203 213 225)' className='' size={"24px"} />
+          </Link>
           <div className='flex flex-col items-center mt-6 gap-6'>
-            <div className='w-40 h-40 bg-indigo-500 rounded-full'>
-            </div>
+            <img src={emptyCartIcon} alt='cart-logo' className='w-40 h-40' />
+            {/* <div className='w-40 h-40 bg-indigo-400 rounded-full flex items-center place-content-center'>
+            </div> */}
             <h1 className='text-5xl'>Your Cart is Empty</h1>
             <p>Browse our
               categories and discover our best deals. Happy shopping! 🎉</p>
