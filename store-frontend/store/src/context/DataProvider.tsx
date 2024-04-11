@@ -27,9 +27,13 @@ const DataProvider: React.FC<MyComponentProps> = ({ children }) => {
     onSuccess: (response) => {
       setUser(response)
       setIsAuthenticated(true)
+      setIsLoading(false)
       navigate("/home")
     },
-    onError: (error) => console.log(error)
+    onError: (error) => {
+      console.log(error)
+      navigate("/error-page")
+    }
   })
 
   // Function to fetch user data from Google after successful sign-in
@@ -43,7 +47,6 @@ const DataProvider: React.FC<MyComponentProps> = ({ children }) => {
           }
         })
         setProfile(loginDataResponse.data)
-        console.log(profile);
       }
     } catch (err) {
       console.log("Error", err);

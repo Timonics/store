@@ -36,6 +36,19 @@ export interface MyComponentProps {
   children: React.ReactNode;
 }
 
+export default interface UserRegisterData {
+  name: string,
+  email: string,
+  password: string,
+  confirmPassword: string,
+  street: string,
+  apartment: string,
+  city: string,
+  zip: string,
+  country: string,
+  phone: number
+}
+
 export interface UserData {
   email: string;
   password: string;
@@ -52,6 +65,7 @@ export interface GoogleProfileData {
 }
 
 export interface CategoryProps {
+  _id: string,
   name: string;
   image: string;
   isAvailable: boolean;

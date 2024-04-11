@@ -17,7 +17,7 @@ const getAllOrders = async (res, req) => {
 
 const createNewOrder = async (req, res) => {
   try {
-    //map through array of order items and get id of each item
+    //map through array of order items(cart) and get id of each item
     //resolving all array of promises into one promise
     const orderItemsIds = Promise.all(
       orderItems.map(async (orderItem) => {

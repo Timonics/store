@@ -30,13 +30,9 @@ const login = () => {
     try {
       const response = await axios.post("http://localhost:3500/api/v1/users/login", loginData)
       const fetchedUserData = response.data
-
       const token = fetchedUserData.token
-
-      //Cookies.set("authToken", token, { secure: true, httpOnly: true })
-
+      Cookies.set("authToken", token, { secure: true, sameSite: "Strict" })
       navigate("/home")
-
       console.log("User successfully logged in", fetchedUserData);
     } catch (err) {
       console.log("Login error", err);
@@ -75,8 +71,8 @@ const login = () => {
               className={`bg-indigo-600 rounded-lg w-1/3 p-1 text-slate-200 text-bold hover:text-slate-50 hover:bg-indigo-800`}
             >Log in</button>
           </form>
-          <button 
-            className='flex bg-gray-900 gap-2 rounded-md p-2 shadow-2xl' 
+          <button
+            className='flex bg-gray-900 gap-2 rounded-md p-2 shadow-2xl'
             onClick={googleSignIn}
           >
             <FcGoogle />

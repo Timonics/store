@@ -12,7 +12,12 @@ const home = () => {
         <SideBar />
       </div>
       <div className="w-2/3">
-        <Hero />
+        <Hero 
+          _id={""}
+          name={""} 
+          image={""} 
+          isAvailable={false} 
+        />
       </div>
     </div>
   );
